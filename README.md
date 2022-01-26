@@ -1,2 +1,2 @@
 # WeebQoute
-This is a CLI application that provides random quotes form your favourite anime 
+This is a CLI application that provides random quotes from your favourite anime 
