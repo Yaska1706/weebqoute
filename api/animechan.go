@@ -1,5 +1,7 @@
 package api
 
+import "fmt"
+
 type QouteAnime struct {
 	Anime     string
 	Character string
@@ -9,16 +11,27 @@ type QouteAnime struct {
 const ANIME_API_URL = "https://animechan.vercel.app/api/"
 
 // GetAllAnime returns all available anime
-func GetAllAnime() QouteAnime {
-	var quoteanime QouteAnime
+func GetAllAnime() []string {
 
-	return quoteanime
+	var animes = GetAllAnimeRequest(ANIME_API_URL + "available/anime")
+	return animes
 }
 
 // GetSpecificAnime returns a specific anime
-func GetSpecificAnime(anime string) string {
+func GetSpecificAnime(animeTitle string) string {
+	var result string
+	animes := GetAllAnime()
+	for _, anime := range animes {
+		if animeTitle == anime {
+			result = fmt.Sprintf("%v found", animeTitle)
 
-	return ""
+		} else {
+			var ErrAnimeNotFound = "Anime not Found"
+			result = ErrAnimeNotFound
+		}
+
+	}
+	return result
 }
 
 //GetRandom returns a random quote
@@ -29,20 +42,20 @@ func GetRandom() QouteAnime {
 
 // GetTenRandom returns 10 random quotes
 func GetTenRandom() []QouteAnime {
-	var quotesanime = GetRequest(ANIME_API_URL + "quotes")
+	var quotesanime = GetAllRequest(ANIME_API_URL + "quotes")
 	return quotesanime
 
 }
 
 // GetByAnime returns quotes from a specific anime
 func GetByAnime(anime string) []QouteAnime {
-	var quotesanime = GetRequest(ANIME_API_URL + "quotes/anime?title=" + anime)
+	var quotesanime = GetAllRequest(ANIME_API_URL + "quotes/anime?title=" + anime)
 	return quotesanime
 
 }
 
 // GetByCharacter returns quotes by anime character
 func GetByCharacter(character string) []QouteAnime {
-	var quotesanime = GetRequest(ANIME_API_URL + "quotes/character?name=" + character)
+	var quotesanime = GetAllRequest(ANIME_API_URL + "quotes/character?name=" + character)
 	return quotesanime
 }
