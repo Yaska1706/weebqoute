@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: weebquote
+    image: weebquote
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/app
