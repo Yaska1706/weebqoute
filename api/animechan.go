@@ -3,9 +3,9 @@ package api
 import "fmt"
 
 type QouteAnime struct {
-	Anime     string
-	Character string
-	Qoute     string
+	Anime     string `json:"anime"`
+	Character string `json:"character"`
+	Qoute     string `json:"quote"`
 }
 
 const ANIME_API_URL = "https://animechan.vercel.app/api/"
