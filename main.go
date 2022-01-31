@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/Yaska1706/WeebQoute/cmd"
 
 func main() {
-	fmt.Println("Welcome to weebquote")
+	cmd.Setup()
 }
