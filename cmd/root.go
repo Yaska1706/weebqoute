@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/Yaska1706/WeebQoute/api"
+	"github.com/Yaska1706/weebqoute/api"
 	"github.com/urfave/cli"
 )
 

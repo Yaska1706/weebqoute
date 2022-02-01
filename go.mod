@@ -1,4 +1,4 @@
-module github.com/Yaska1706/WeebQoute
+module github.com/Yaska1706/weebqoute
 
 go 1.16
 
