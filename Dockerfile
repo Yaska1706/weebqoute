@@ -14,4 +14,4 @@ COPY . .
 #Build app
 RUN go build -o /weebquote
 
-CMD [ "./weebquote" ]
+CMD [ "/weebquote" ]
