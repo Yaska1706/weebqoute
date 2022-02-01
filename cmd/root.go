@@ -32,11 +32,24 @@ func Setup() {
 			Action: func(c *cli.Context) error {
 				quotes := api.GetTenRandom()
 				for _, quote := range quotes {
-					fmt.Printf("Anime: %q\n", quote.Anime)
-					fmt.Printf("Character: %q\n", quote.Character)
-					fmt.Printf("Quote: %q\n", quote.Qoute)
+					fmt.Printf("%q(%q,%q)\n", quote.Qoute, quote.Character, quote.Anime)
 					fmt.Println("/-------------------------/")
 				}
+				return nil
+			},
+		},
+		{
+			Name:  "animes",
+			Usage: "Lists down available anime",
+
+			Action: func(c *cli.Context) error {
+				animes := api.GetAllAnime()
+				var number = 1
+				for _, anime := range animes {
+					fmt.Printf("%v. %q\n", number, anime)
+					number += 1
+				}
+
 				return nil
 			},
 		},
