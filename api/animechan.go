@@ -19,15 +19,14 @@ func GetAllAnime() []string {
 
 // GetSpecificAnime returns a specific anime
 func GetSpecificAnime(animeTitle string) string {
-	var result string
+	var ErrAnimeNotFound = "Anime not Found"
+	result := ErrAnimeNotFound
 	animes := GetAllAnime()
 	for _, anime := range animes {
-		if animeTitle == anime {
-			result = fmt.Sprintf("%v found", animeTitle)
 
-		} else {
-			var ErrAnimeNotFound = "Anime not Found"
-			result = ErrAnimeNotFound
+		if anime == animeTitle {
+			result = fmt.Sprintf("%v exists", animeTitle)
+			break
 		}
 
 	}
