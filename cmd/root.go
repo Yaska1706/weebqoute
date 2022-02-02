@@ -57,12 +57,10 @@ func Setup() {
 					Action: func(c *cli.Context) error {
 						title := c.Args().First()
 						quotes := api.GetByAnime(title)
-						for index, quote := range quotes {
+						for _, quote := range quotes {
 							fmt.Printf("%q(%q,%q)\n", quote.Qoute, quote.Character, quote.Anime)
 							fmt.Println("/-------------------------/")
-							if index == 0 {
-								break
-							}
+
 						}
 						return nil
 					},
