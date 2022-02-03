@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/Yaska1706/weebqoute/api"
+	"github.com/manifoldco/promptui"
 	"github.com/urfave/cli"
 )
 
@@ -13,6 +14,7 @@ func Setup() {
 	app := cli.NewApp()
 	app.Name = "WeebQuote"
 	app.Usage = "Get random quotes from your favourite anime"
+	app.UsageText = "WeebQuote [command] [subcommand] [arguments..]"
 	app.Version = "v1.0.0"
 
 	// we create our commands
@@ -89,9 +91,36 @@ func Setup() {
 					Name:  "title",
 					Usage: "[Anime title] Provide if an anime is available",
 					Action: func(c *cli.Context) error {
-						name := c.Args().First()
+						var name string
 						anime := api.GetSpecificAnime(name)
-						fmt.Printf("%q %q\n", name, anime)
+
+						validate := func(input string) error {
+							anime = api.GetSpecificAnime(input)
+
+							return nil
+						}
+
+						templates := &promptui.PromptTemplates{
+							Prompt:  "{{ . }} ",
+							Valid:   "{{ . | green }} ",
+							Invalid: "{{ . | red }} ",
+							Success: "{{ . | bold | yellow }} ",
+							Confirm: "{{. | cyan }}",
+						}
+
+						prompt := promptui.Prompt{
+							Label:     "Search Title",
+							Templates: templates,
+							Validate:  validate,
+						}
+
+						result, err := prompt.Run()
+
+						if err != nil {
+							fmt.Printf("Prompt failed %v\n", err)
+							return err
+						}
+						fmt.Printf("%q ,%q\n", result, anime)
 
 						return nil
 					},
